@@ -2,7 +2,10 @@ import pypyodbc as dbc
 import pandas as pd
 
 class Cnx:
-    """CULA SQL Server Connection Attributes"""
+    """
+    **SECURE**
+    Interface with CULA Internal Databases.
+    """
     # used to connect to local db
     # spec connection string for accessing server
     DRIVER_NAME = 'SQL SERVER'
@@ -28,6 +31,14 @@ class Cnx:
 
     # grab data from cursor
     _data = ''
+
+    def __init__(self, driver='', server='', database=''):
+        if driver == '' and server == '' and database == '':
+            pass
+        else:
+            self.DRIVER_NAME = driver
+            self.SERVER_NAME = server
+            self.DATABASE_NAME = database
 
     def to_df(self):
         return pd.DataFrame(self._data)
