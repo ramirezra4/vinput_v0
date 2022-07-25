@@ -19,7 +19,7 @@ class Cnx:
         DATABASE={DATABASE_NAME};
         Trust_Connection=yes;
     """
-
+    
     # connection object
     _conn = dbc.connect(connection_string)
 

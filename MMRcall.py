@@ -14,7 +14,7 @@ class MMRapi:
     API Call follows the format below: [Base_URL][DateTime_String][...][VIN].
     As such a large portion of this module is dedicated to formatting that URL.
 
-    Outputs a dictionary of body:vid pairings.
+    Outputs a dictionary of body: vid pairings.
     """
 
     def __inti__(self, vin):
@@ -55,3 +55,7 @@ class MMRapi:
         print(self.url)
         r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
         return r.json()
+
+
+
+
