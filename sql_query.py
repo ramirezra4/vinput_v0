@@ -29,34 +29,26 @@ cursor = conn.cursor()
 def query_vin(i):
     """
     Primary means of accessing the CULA RV database. Tries to map
-    VIN's to RV's directly, else uses the 
+    VIN's to RV's directly in CULA database. 
     """
     query = f"""
-    SELECT VIN, NADA_VehicleID, MileageBand, Month24, Month30, Month36, Month39, Month42, Month48, Month60 
+    SELECT VIN, 
+    NADA_VehicleID, 
+    MileageBand, 
+    Month24, 
+    Month30, 
+    Month36, 
+    Month39, 
+    Month42, 
+    Month48, 
+    Month60 
     FROM [dbo].[Used Leasing DB JA22 CULA VIN Specific File] WHERE VIN = '{i}'
     """
     cursor.execute(query)
     data = cursor.fetchall()
-    if data:
-        data = to_df(data)
-        print(data)
-    else:
-        models = MMRapi(i).match()['result']
-        data = pd.DataFrame() 
-        for model in models:
-            for trim in model:
-                print(trim)
-                pd.concat([trim])
+    data = to_df(data)
+
     return data
-
-
-def query_nada(i):
-    query = f"""
-    SELECT VIN, NADA_VehicleID, MileageBand, Month24, Month30, Month36, Month39, Month42, Month48, Month60 
-    FROM [dbo].[Used Leasing DB JA22 CULA VIN Specific File] WHERE NADA_VehicleID = '{input}'
-    """
-    cursor.execute(query)
-    return cursor.fetchall()
 
 
 def to_df(data):
@@ -69,7 +61,7 @@ def to_df(data):
     return df_t
 
 
-query_vin('WBA8J1C39HA018978')
+
 
 
 
