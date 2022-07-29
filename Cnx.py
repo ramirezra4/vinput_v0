@@ -39,6 +39,3 @@ class Cnx:
             self.DRIVER_NAME = driver
             self.SERVER_NAME = server
             self.DATABASE_NAME = database
-
-    def to_df(self):
-        return pd.DataFrame(self._data)

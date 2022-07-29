@@ -1,5 +1,7 @@
 from cgi import print_arguments
 from datetime import date, datetime
+from email import header
+from bitarray import test
 import requests
 import pandas as pd
 
@@ -17,7 +19,7 @@ class MMRapi:
     Outputs a dictionary of body: vid pairings.
     """
 
-    def __inti__(self, vin):
+    def __init__(self, vin):
         self.vin = vin
 
     # public url
@@ -42,7 +44,7 @@ class MMRapi:
         self.vin = vin
         self.url
 
-    # match VIN # to MID, output JSON
+    # Request MMRAPI, output JSON
     def match(self):
         """
         1. Assemble URL
@@ -57,5 +59,11 @@ class MMRapi:
         return r.json()
 
 
+
+
+test_call = MMRapi('WA1AAAFY2M2010943')
+mtch = test_call.match()
+for i in mtch:
+    print(mtch[i])
 
 
