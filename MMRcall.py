@@ -53,17 +53,41 @@ class MMRapi:
         4. Retrieve JSON of matches (dict)
         5. Return dict mapping body -> MID's
         """
-        self.url = f'{self.base_url}?period=0&vin={self.vin}'
-        print(self.url)
-        r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
-        return r.json()
+        try:
+            self.url = f'{self.base_url}?period=0&vin={self.vin}'
+            print(self.url)
+            r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
+            return r.json()['result'][0]
+        except:
+            return "MMR API Call Failed."
 
+    def model_year(self):
+        """Retrieve Model Year."""
+        return self.match()['modelyear']
 
+    def make(self):
+        """Retrieve make."""
+        return self.match()['make']
 
+    def model(self):
+        """Retrieve car model."""
+        return self.match()['model']
 
-test_call = MMRapi('WA1AAAFY2M2010943')
-mtch = test_call.match()
-for i in mtch:
-    print(mtch[i])
+    def body(self):
+        """Retrieve body style."""
+        return self.match()['body']
+    
+    def ugc_vid(self):
+        """
+        Retrieve UGC Vehicle ID 
+        for some reason not readily apparent.
+        """
+        return self.match()['ucgvehicleid']
 
+    def vid(self):
+        """You want the VID? Take it!"""
+        return self.match()['vid']
 
+ilx = MMRapi('19UDE2F76NA004740')
+
+print(ilx.match())

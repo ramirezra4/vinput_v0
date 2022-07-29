@@ -26,16 +26,28 @@ class Cnx:
     # cursor object instantiates interface between Python and DB
     _cursor = _conn.cursor()
 
-    # query passed to cursor
-    _query = ''
-
     # grab data from cursor
     _data = ''
 
-    def __init__(self, driver='', server='', database=''):
-        if driver == '' and server == '' and database == '':
+    def __init__(self, driver='', server='', database='', query= ''):
+        if driver == '' and server == '' and database == '' or query == '':
             pass
         else:
             self.DRIVER_NAME = driver
             self.SERVER_NAME = server
             self.DATABASE_NAME = database
+            self.query = query
+
+    def set_query(self, q):
+        """Set the query."""
+        self.query = q
+
+    def execute(self):
+        """
+        Execute Query --> (_query).
+        Returns resulting data.
+        """
+        self._cursor.execute(self.query)
+        return self._cursor.fetchall() 
+
+    
