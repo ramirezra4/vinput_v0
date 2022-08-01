@@ -41,12 +41,6 @@ def query_vin(i):
         return []
     return data
 
-def query_make():
-   """
-   Fuzzy match new vin.
-   """ 
-    
-
 def to_df(data):
     lst = []
     for i in data:

@@ -53,6 +53,16 @@ class MMRapi:
         """Initialize MMR API Call."""
         self.vin = vin
 
+    def full_call(self):
+        """Return unaltered MMR Call"""
+        try:
+            self.url = f'{self.base_url}?period=0&vin={self.vin}'  
+            r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
+            out = r.json()
+            print(out)
+            return out
+        except:
+            print("MMR Call Failed")
 
     # Request MMRAPI, output JSON
     def match(self):
@@ -65,7 +75,7 @@ class MMRapi:
         """
         try:
             self.url = f'{self.base_url}?period=0&vin={self.vin}'
-            print(self.url)
+            # print(self.url)
             r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
             self._match = r.json()['result'][0]
             self._my = self._match['modelyear']
@@ -106,5 +116,5 @@ class MMRapi:
 
 ilx = MMRapi('5UXCR6C09N9M97942')
 
-ilx.match()
-print(ilx._match)
+ilx.full_call()
+
