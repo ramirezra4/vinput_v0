@@ -113,8 +113,3 @@ class MMRapi:
     def vid(self):
         """You want the VID? Take it!"""
         return self._vid
-
-ilx = MMRapi('5UXCR6C09N9M97942')
-
-ilx.full_call()
-

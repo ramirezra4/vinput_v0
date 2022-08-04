@@ -1,32 +1,20 @@
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
-from platterfunc import main
+from multiprocessing.connection import wait
+from flask import Flask, jsonify
+from platterALG import main
 
 app = Flask(__name__)
-api = Api(app)
 
-parser = reqparse.RequestParser()
-parser.add_argument('vin')
+@app.route("/test")
+def hello():
+    return jsonify({"Hello": "Hello World!"})
 
-class Welcome(Resource):
-    def get(self):
-        return {
-            'Welcome to': 'vinput',
-            'Enter a vin via': '/vinput'
-            }
+@app.route('/vinput/vin=<string:vin>', methods=['GET'])
+def get_vinmap(vin):
+    return jsonify(main(vin).to_dict())
 
-class VinPut(Resource):
-    def get(self, vin):
-        args = parser.parse_args()
-        vin = {'vin': args['vin']}
-        return main(vin).to_json()
-
-
-##
-## Api resource routing below
-##
-api.add_resource(Welcome, '/')
-api.add_resource(VinPut, '/vinput')
+@app.route('/multi/num=<int:num>', methods=['GET'])
+def get_multiply(num):
+    return jsonify({'result': num*10})
 
 if __name__ == '__main__':
     app.run(debug=True)
