@@ -1,6 +1,5 @@
-from datetime import date, datetime
+from datetime import datetime
 import requests
-import pandas as pd
 
 class MMRapi:
     """
@@ -59,7 +58,6 @@ class MMRapi:
             self.url = f'{self.base_url}?period=0&vin={self.vin}'  
             r = requests.get(self.url, headers={"api-key": f'{self.api_key}', "accept": "application.json"})
             out = r.json()
-            print(out)
             return out
         except:
             print("MMR Call Failed")
