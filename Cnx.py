@@ -1,4 +1,4 @@
-import pyodbc as dbc
+import pypyodbc as dbc
 
 class Cnx:
     """

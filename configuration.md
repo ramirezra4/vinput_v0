@@ -2,7 +2,7 @@
 ## System Requirements and Dependencies (install via pip)
 * **Python**
 * Flask
-* pyodbc
+* pypyodbc
 * requests
 * datetime
 * pandas

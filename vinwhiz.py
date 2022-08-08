@@ -1,17 +1,17 @@
 import requests
 import pandas as pd 
 
+_api_key = '2D979E71-EE01-4B7D-A995-F2A2D29A5E85'
+
+def _url(vin):
+    return  f'https://apitesting.vinwhiz.com/api/v1.1/vins/{vin}/ris'
+
 def get_styleID(vin):
-    url = f'https://apitesting.vinwhiz.com/api/v1.1/vins/{vin}/ris'
-    api_key = '2D979E71-EE01-4B7D-A995-F2A2D29A5E85'
-    r = requests.get(url, headers={"x-apikey": f"{api_key}", "accept": "application/json"})
-    #print(r.json()['signals'][0]['styleId'])
+    r = requests.get(_url(vin), headers={"x-apikey": f"{_api_key}", "accept": "application/json"})
     return r.json()['signals'][0]['styleId']
 
 def vin_year(vin):
-    url = f'https://apitesting.vinwhiz.com/api/v1.1/vins/{vin}/ris'
-    api_key = '2D979E71-EE01-4B7D-A995-F2A2D29A5E85'
-    r = requests.get(url, headers={"x-apikey": f"{api_key}", "accept": "application/json"})
+    r = requests.get(_url(vin), headers={"x-apikey": f"{_api_key}", "accept": "application/json"})
     return r.json()['signals'][0]['vehicleHints']['YEAR']
 
 # print(get_styleID('5UXCR6C09N9M97942'))

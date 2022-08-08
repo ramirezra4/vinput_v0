@@ -11,10 +11,10 @@ def slice(i, end, start=0):
     """
     return str(i)[start:end]
 
-def main(vin):
+def main(vin, region):
     """
     Main functional interface for VINPUT.
-    Input: VIN Number.
+    Input: VIN Number, State (abr).
     Output: Dataframe
     """
     algcode = wiz.vin_alg(vin)
@@ -30,22 +30,18 @@ def main(vin):
         [MakeNumber],
         [ModelNumber],
         [Style],
-        [Month24],
-        [Month30],
-        [Month36],
-        [Month42],
-        [Month48],
-        [Month54],
-        [Month60]
+        [Region],
+        [EffectiveDate]
         FROM [vinput].[dbo].[ALGResidualNewTable20220708]
         WHERE [MakeNumber] = {make_number} AND
         [ModelNumber] = {model_num} AND
         [Style] = {style_num} AND
-        [ModelYear] = {model_year}
+        [ModelYear] = {model_year} AND
+        [Region] = '{region}'
     """
     conn.set_query(quer)
     make_match = conn.execute()
     df = pd.DataFrame(make_match)
-    return df
-
-main('5UXCR6C09N9M97942')
+    df.columns = ['Model Year', 'Description', 'Make Number', 'Model Number', 'Style', 'Region', 'Effective Date']
+    df = df[df['Effective Date'] == df['Effective Date'].max()]
+    return df.to_json()
