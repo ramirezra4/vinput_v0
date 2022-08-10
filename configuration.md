@@ -15,3 +15,6 @@
 3. Update file ALG_US_CHROMEMAP.csv to most recent version available.
 
 # Usage
+1. Run [api.py](api.py) on your webserver (update host to reflect your server).
+
+## Paths

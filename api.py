@@ -19,7 +19,7 @@ def get_algcode(vin):
     _algcode = str(vin_alg(vin))
     return jsonify({'ALG Code': _algcode, 'VIN': vin})
 
-@app.route('/residuals/vin=<string:vin>&state=<string:state>&date=<string:date>', methods=['GET'])
+@app.route('/15kresiduals/vin=<string:vin>&state=<string:state>&date=<string:date>', methods=['GET'])
 def get_vinmap(vin, state, date):
     """
     Input: Vin, State, Contract Date
@@ -27,6 +27,10 @@ def get_vinmap(vin, state, date):
     """
     return jsonify(main(vin, state_region[state], date))
 
+@app.rorute('/singledeal/vin=<string:vin>&state=<string:state>&date=<string:date>&mileage_band=<string:mileage_band>&msrp=<string:msrp>&inception_miles=<string:inception_miles>')
+def get_deal(df, term, ann_miles, msrp, inception_miles):
+    out = main(df, term, ann_miles, msrp, inception_miles)
+    return jsonify(out)
 
 if __name__ == '__main__':
     app.run(debug=True)
