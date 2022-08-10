@@ -5,6 +5,7 @@
 * pypyodbc
 * requests
 * datetime
+* dateutils
 * pandas
 
 ## Checklist
