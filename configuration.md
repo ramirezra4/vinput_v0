@@ -1,5 +1,6 @@
 # VINPUT Configuration Steps
 ## System Requirements and Dependencies (install via pip)
+### Recommend installing Anaconda Distribution
 * **Python**
 * Flask
 * pypyodbc
